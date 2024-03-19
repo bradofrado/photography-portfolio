@@ -11,31 +11,31 @@ import AnimationWrapper from "@/components/ui/animation-wrapper";
 
 type Props = { params: { seriesId: string } };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { seriesId } = params;
-  const data_ = await getPhotoSeries();
-  const data = data_.props.images.filter(
-    (image: any) => image.slug === seriesId
-  )[0];
-  // const data = await getASeries(seriesId);
+// export async function generateMetadata(
+//   { params }: Props,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   const { seriesId } = params;
+//   const data_ = await getPhotoSeries();
+//   const data = data_.props.images.filter(
+//     (image: any) => image.slug === seriesId
+//   )[0];
+//   // const data = await getASeries(seriesId);
 
-  return {
-    title: `Photo Series | ${data.seriesTitle}`,
-    description: data.description,
-  };
-}
+//   return {
+//     title: `Photo Series | ${data.seriesTitle}`,
+//     description: data.description,
+//   };
+// }
 
-export async function generateStaticParams() {
-  const data_ = await getPhotoSeries();
-  const data = data_.props.images;
-  return data.map((image: any) => ({
-    seriesId: image.slug.toString(),
-    revalidate: 86400,
-  }));
-}
+// export async function generateStaticParams() {
+//   const data_ = await getPhotoSeries();
+//   const data = data_.props.images;
+//   return data.map((image: any) => ({
+//     seriesId: image.slug.toString(),
+//     revalidate: 86400,
+//   }));
+// }
 
 // return users .map(user => ({
 //   userId: user.id.toString()
@@ -43,19 +43,19 @@ export async function generateStaticParams() {
 
 async function Page({ params }: Props) {
   const { seriesId } = params;
-  const data_ = await getPhotoSeries();
+  //const data_ = await getPhotoSeries();
 
   //handle pretty urls, the stulg is fetched and the data is filtered from the same query
-  const data = data_.props.images.filter(
+  const data = [].filter(
     (image: any) => image.slug === seriesId
-  )[0];
+  )[0] as {images: any[], seriesTitle: string, description: string};
   // console.log(data);
 
   // let x = await JSON.stringify(data.images);
   return (
     <AnimationWrapper>
-      <Header title={data.seriesTitle} subtitle={data.description} />
-      <section className="py-24 md:mx-1 justify-self-center ">
+      {data ? <><Header title={data.seriesTitle} subtitle={data.description} />
+       <section className="py-24 md:mx-1 justify-self-center ">
         {data.images.map((image: any, index: number) => (
           <div
             className={`flex flex-col items-center justify-between md:px-24 pt-24 py-1 text-2xl tracking-tight transition-colors text-muted-foreground ${
@@ -90,7 +90,7 @@ async function Page({ params }: Props) {
             </div>
           </div>
         ))}
-      </section>
+      </section></> : null}
       {/* <div className="container flex flex-col my-10">
         <div className="flex justify-center">{x}</div>
       </div> */}

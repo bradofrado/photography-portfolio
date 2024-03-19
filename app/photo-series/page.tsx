@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const Page = async (props: Props) => {
-  const data = await getPhotoSeries();
+  //const data = await getPhotoSeries();
   return (
     <AnimationWrapper>
       <Header
@@ -25,7 +25,7 @@ const Page = async (props: Props) => {
       />
 
       <div className="flex flex-col items-center justify-between md:px-24 pt-24">
-        {data.props.images.map((image: ImageSeriesProps, index: number) => (
+        {[].map((image: ImageSeriesProps, index: number) => (
           // for each image, show the image alternatingly on left and right with the setiesTitle and description on the other side
           <>
             <Separator className={index === 0 ? "hidden" : ""} />

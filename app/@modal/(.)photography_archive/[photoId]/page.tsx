@@ -9,43 +9,43 @@ import Image from "next/image";
 
 type Props = { params: { photoId: string } };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { photoId } = params;
-  const data = await getAnAsset(photoId);
+// export async function generateMetadata(
+//   { params }: Props,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   const { photoId } = params;
+//   const data = await getAnAsset(photoId);
 
-  return {
-    title: `Photograph | ${data.alt}`,
-  };
-}
+//   return {
+//     title: `Photograph | ${data.alt}`,
+//   };
+// }
 
-export async function generateStaticParams() {
-  const dataAll = await getDataPhotographs();
-  const data = dataAll.props.images;
-  return data.map((image: any) => ({
-    photoId: image.idc.toString(),
-    revalidate: 86400,
-  }));
-}
+// export async function generateStaticParams() {
+//   const dataAll = await getDataPhotographs();
+//   const data = dataAll.props.images;
+//   return data.map((image: any) => ({
+//     photoId: image.idc.toString(),
+//     revalidate: 86400,
+//   }));
+// }
 
 async function Page({ params }: Props) {
   // export default async function Page({ params }: { params: Props }) {
   // const { photoId } = params;
   // const data = await getAnAsset(photoId);
-  var dataAll = await getDataPhotographs();
+  //var dataAll = await getDataPhotographs();
   var idc = params.photoId;
 
   // const currentImage = data;
   return (
     <Modal>
-      <ModalSwiper images={dataAll.props.images} idc={idc} show={false} />
+      <ModalSwiper images={[]} idc={idc} show={false} />
     </Modal>
   );
   return (
     <Modal>
-      <ModalSwiper images={dataAll.props.images} idc={idc} show={true} />
+      <ModalSwiper images={[]} idc={idc} show={true} />
       {/* <div className="relative z-50 flex aspect-auto w-full max-w-7xl items-center wide:h-full xl:taller-than-854:h-auto"> */}
       {/* <div className=" relative z-50 inset-0 mx-auto flex max-w-7xl items-center justify-center">
         <div className="w-full flex flex-col relative z-50">

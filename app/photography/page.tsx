@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({}: Props) {
-  const data = await getDataPhotographs();
+  //const data = await getDataPhotographs();
   return (
     <AnimationWrapper>
       <div>
@@ -24,7 +24,7 @@ export default async function Page({}: Props) {
           subtitle="A moment in time and space, captured and rendered for its perceived beauty."
         />
         <section className="grid md:grid-cols-gallery auto-rows-[5px] py-24 md:mx-1">
-          {data.props.images.map((image: ImageProps, index: number) => (
+          {[].map((image: ImageProps, index: number) => (
             <ImageContainer key={index} image={image} index={index} href={""} />
           ))}
         </section>
