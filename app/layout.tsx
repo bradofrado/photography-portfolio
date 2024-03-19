@@ -6,6 +6,8 @@ import Menu from "@/components/ui/menu";
 import { Particles } from "@/components/particles";
 import { Providers } from "@/lib/providers";
 import GoogleAnalytics from "./GoogleAnalytics";
+import {HarmonySetup} from 'harmony-ai-editor';
+import { fonts } from "@/utils/fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +36,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children, modal }) => {
           </h2>
         </Providers>
         <GoogleAnalytics />
+        {process.env.NODE_ENV !== 'production' || true ? <HarmonySetup repositoryId="879a8ece-9666-4ec1-9f7d-5d96c284dc9a" fonts={fonts}/> : null }
       </body>
       {/* {modal} */}
     </html>
