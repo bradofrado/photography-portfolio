@@ -15,7 +15,7 @@ const nextConfig = {
   },
   experimental: {
 		// Only run the plugin in development mode
-		swcPlugins: process.env.NODE_ENV !== 'production' ? [
+		swcPlugins: process.env.NODE_ENV !== 'production' || true ? [
 			['harmony-ai-plugin', {rootDir: new URL('.', import.meta.url).pathname}]
 		] : []
 	},
